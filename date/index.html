@@ -1,0 +1,18 @@
+---
+layout: list
+---
+<ul>
+{% assign count = 1 %}
+{% assign s_date = null %}
+{% assign t_date = null %}
+{% for post in site.posts %}
+{% capture t_date %}{{post.date | date:"%Y年%m月"}}{% endcapture %}
+{% if t_date == s_date %}{% else %}
+<li id='mao_{{ post.date  | date:"%Y_%m" }}' class='title_of_list'>{{ t_date }}</li>
+{% endif %}
+{% capture s_date %}{{ t_date }}{% endcapture %}
+<li>
+<time class='post_time' datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>  <a target="_blank" href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}" class='post_link'>{{ post.title }}</a>
+</li>
+{% endfor %}
+</ul>

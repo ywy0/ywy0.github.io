@@ -1,0 +1,54 @@
+---
+layout: list
+title: 文章列表
+---
+    <ul> 
+     <li class='title_of_list'><span>{{ page.title }}</span></li>
+     {% comment %}
+      //判断分页是否可用 paginator is avalable or not
+     {% endcomment %}
+     
+     {% assign which_posts = site %}
+     {% if site.paginate %}
+        {% assign which_posts = paginator %}
+     {% endif %}
+     {% for post in which_posts.posts %}
+     <li>
+        <time class="post_time">{{ post.date | date: "%Y-%m-%d" }}</time>
+        <a target="_blank" class='post_link' href="{{ site.baseurl }} {{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+     </li>
+     {% endfor %}
+     {% if site.paginate %}
+     <li id="fen-page">
+     {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path }}">上一页</a>
+     {% else %}
+        <span class="previous_disabled">上一页</span>
+     {% endif %}
+      <script>
+        function jump_to_page()
+        {
+        
+        if(parseInt(document.getElementById("page_count").value) < 2)
+        {
+            window.location.href="{{ site.baseurl }}/index.html";
+        }
+        else
+        {
+        window.location.href="{{ site.baseurl }}/blog/page"+document.getElementById("page_count").value;
+        }
+        }
+        </script>
+      <input value="{{ paginator.page }}" type="text" id="page_count">&nbsp;
+        <input type="button" id="jump_to_page" value="跳页" onClick="jump_to_page()">
+      
+      (共{{ paginator.total_pages }}页)
+      
+     {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path }}">下一页</a>
+     {% else %}
+        <span class="previous disabled">下一页</span>
+     {% endif %}
+     </li> 
+     {% endif %}
+    </ul> 
