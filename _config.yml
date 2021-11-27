@@ -1,4 +1,3 @@
-markdown: kramdown
 permalink: /:year/:month-:day-:title.html
 destination: _site
 name: 忆屋 #VeekXT    #将会显示在左上角
@@ -12,6 +11,10 @@ paginate_path: "/blog/page:num/" #此项不可更改
 myurl: https://ywy0.github.io #http://veekxt.com #此url指向你的首页
 baseurl: "" #如果是项目pages，填写为"/<项目名>"
 
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
 encoding: "utf-8"
 timezone: Asia/Shanghai
 repository: ywy0/ywy0.github.io
