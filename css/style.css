@@ -65,9 +65,14 @@ pre code{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;margin:.
 }
 
 .nav ul {
-	margin-left: 15px;
-	padding: 0;
-	list-style-type: none
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    height: 100%; /* 全屏高度 */
+    position: fixed; 
+    overflow: auto; /* 如果导航栏选项多，允许滚动 */
 }
 
 .link_github {
