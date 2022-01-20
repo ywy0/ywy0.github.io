@@ -23,3 +23,10 @@ layout: resource
 资源：
 <a href="{{ site.url }}/file/IDM trial reset.exe">IDM trial reset.exe</a>
 </details>
+
+<details>
+<summary>ChromeGo</summary>
+
+资源：
+<a href="{{ site.url }}/file/ChromeGo.zip">ChromeGo.zip</a>
+</details>
