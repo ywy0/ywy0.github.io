@@ -1,6 +1,5 @@
-_site/*
-*~
-~*
-notpush_*
-mysh_*
-tmp_*
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor

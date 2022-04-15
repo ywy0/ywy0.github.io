@@ -1,7 +1,0 @@
-<div class="categories"> 
-<ul> 
-<li class='title_of_list'><span>归档</span></li>
-{% for cat in site.categories %}
-<li><a href="{{ site.baseurl }}/sort/index.html#{{ cat[0] }}" title="{{ cat[0] }}">{{ cat[0] }}</a> ({{ cat[1].size }})</li>{% endfor %}
-</ul> 
-</div>

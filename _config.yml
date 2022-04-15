@@ -1,24 +1,58 @@
-permalink: /:year/:month-:day-:title.html
-destination: _site
-name: 忆屋 #VeekXT    #将会显示在左上角
-myname: eeni #VeekXT  #你的名字，显示在页脚和文章开始
-email: 3082532836@qq.com #veekxt@gmail.com #邮箱
-#duoshuo: onepoint #务必改成自己的多说账号或删除此项 
-github: ywy0 #veekxt   #github账号，用于构建github链接
-project: ywy0.github.io #veekxt_blog #github上的仓库名
-paginate: 16 #20   #每页文章个数
-paginate_path: "/blog/page:num/" #此项不可更改
-myurl: https://ywy0.github.io #http://veekxt.com #此url指向你的首页
-baseurl: "" #如果是项目pages，填写为"/<项目名>"
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you: 
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
 
-markdown: kramdown
+title: Monos
+email: ejjoo7994@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Themed by ejjoo
+# baseurl: "/" # the subpath of your site, e.g. /blog
+# url: "http://ejjoo.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+github_username: ejjoo
 highlighter: rouge
-kramdown:
-  syntax_highlighter: rouge
-encoding: "utf-8"
-timezone: Asia/Shanghai
-repository: ywy0/ywy0.github.io
-cdn:
-    jsdelivr:
-        enabled: true
-theme: jekyll-theme-cayman
+svg:
+  optimize: true
+# Build settings
+# theme: minima
+highlighter-theme: monokai
+date_format: "%Y-%M-%D"
+plugins:
+  - jekyll-feed
+category_dir: category/
+tag_dir: tag/
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
