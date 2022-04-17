@@ -57,3 +57,10 @@ tag_dir: tag/
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+encoding: "utf-8"
+timezone: Asia/Shanghai
+repository: ywy0/ywy0.github.io
+cdn:
+    jsdelivr:
+        enabled: true
