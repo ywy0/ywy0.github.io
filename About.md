@@ -1,10 +1,8 @@
 ---
-title: 关于
+title: About
+layout: page
 ---
 
-
-
-----
 
 ### 联系方式：
 
