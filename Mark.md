@@ -3,16 +3,13 @@ title: Mark
 layout: page
 ---
 
-<details>
-<summary>小说</summary>
-
 1. [https://www.qbiqu.com/](https://www.qbiqu.com/)
 2. [https://www.biqudu.net/](https://www.biqudu.net/)
 3. [https://www.xbiquge.la/](https://www.xbiquge.la/)
 
 ------------
 
-|             书名 | 进度 |
+|             小说 | 进度 |
 | ---------------: | ---: |
 |             赘婿 | 1005 |
 |             天王 |    1 |
@@ -34,18 +31,12 @@ layout: page
 |         逆天邪神 | 1786 |
 |   死灵术士闯异界 |  705 |
 
-</details>
-
-<details>
-<summary>番</summary>
 
 1. [https://yhdm.org/](https://yhdm.org/)
 2. [http://www.dmh8.com/](http://www.dmh8.com/)
 
 ------------
 
-| 片名 | 进度 |
+| 番剧 | 进度 |
 | ---------------: | ---: |
 | 无职转生| 23 |
-
-</details>
