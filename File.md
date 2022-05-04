@@ -30,3 +30,10 @@ layout: page
 资源：
 <a href="{{ site.url }}/file/ChromeGo.zip">ChromeGo.zip</a>
 </details>
+
+<details>
+<summary>Steam Community</summary>
+
+资源：
+<a href="{{ site.url }}/file/Steam Community.zip">Steam Community.zip</a>
+</details>
