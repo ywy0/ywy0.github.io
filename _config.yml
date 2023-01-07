@@ -171,7 +171,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                     transform: rotate3d(0, 1, 0, -180deg);
                   }
                 </style>
-               - | # 不蒜子页面统计，看不懂可不改
+              - | # 不蒜子页面统计，看不懂可不改
                 <div>
                   <div>
                     <i class="fa-solid fa-eye fa-fw"></i>
