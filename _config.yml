@@ -171,7 +171,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                     transform: rotate3d(0, 1, 0, -180deg);
                   }
                 </style>
-                - | # 不蒜子页面统计，看不懂可不改
+               - | # 不蒜子页面统计，看不懂可不改
                 <div>
                   <div>
                     <i class="fa-solid fa-eye fa-fw"></i>
@@ -206,7 +206,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
               - | # Copyright声明
                 <div>
                   <i class="fa-solid fa-copyright fa-fw"></i>
-                  2017-2022 WuK
+                  2017-2023 忆
                 </div>
             wordcount: # 全站字数统计
               enable: false # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
