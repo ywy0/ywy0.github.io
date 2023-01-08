@@ -19,6 +19,6 @@
 - WeChat
   - **lfcemy**
 - E-mail:
-  - **[3082532836[at]qq.com](mailto:3082532836@qq.com)**
+  - **[3082532836@qq.com](mailto:3082532836@qq.com)**
 
 <!-- .slide -->
