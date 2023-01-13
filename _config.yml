@@ -1,19 +1,15 @@
 title: yi # 站点标题
 description: | # 头像背后的信息（html格式），<br/>代表换行
-  SYSU第6年<br/>
-  水野爱<br/>
-  田宫例四驱车<br/>
+  高中生活ing<br/>
+  <br/>
   <a href="3082532836@qq.com">
     <i class="fa-solid fa-envelope"></i>
   </a>
   <a href="https://github.com/ywy0">
     <i class="fa-brands fa-github"></i>
   </a>
-  <a href="https://space.bilibili.com/166390020">
+  <a href="https://space.bilibili.com/2130696495">
     <i class="fa-brands fa-bilibili"></i>
-  </a>
-  <a href="https://www.zhihu.com/people/wu.kan/activities">
-    <i class="fa-brands fa-zhihu"></i>
   </a>
   <br/>
 url: https://ywy0.github.io # 你的域名，例如 https://wu-kan.github.io
@@ -193,17 +189,10 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                     async='async'
                   ></script>
                 </div>
-              - | # 觉得我的主题好用的话，让更多的人知道它吧！
-                <div>
-                  <i class="fa-solid fa-thumbs-up fa-fw"></i>
-                  <a href="https://jekyll-theme-WuK.wu-kan.cn">
-                    jekyll-theme-WuK
-                  </a>
-                </div>
               - | # Copyright声明
                 <div>
                   <i class="fa-solid fa-copyright fa-fw"></i>
-                  2017-2022 ywy0
+                  2017-2023 ywy0
                 </div>
             wordcount: # 全站字数统计
               enable: false # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
@@ -579,7 +568,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
             enable: true
             prepend: <i class="fa-solid fa-clock fa-fw"></i>
             unit: 分
-            divided_by: 300 # 正常人的阅读速度大概每分钟三百个字
+            divided_by: 256 # 正常人的阅读速度大概每分钟三百个字
           copyright:
             | # 我的文章使用最宽松的知识共享协议：署名 4.0 国际 (CC BY 4.0)。您可以自由地：共享 — 在任何媒介以任何形式复制、发行本作品；演绎 — 修改、转换或以本作品为基础进行创作；在任何用途下，甚至商业目的。只要你遵守许可协议条款，许可人就无法收回你的这些权利。惟须遵守下列条件：署名 — 您必须给出适当的署名，提供指向本许可协议的链接，同时标明是否（对原始作品）作了修改。您可以用任何合理的方式来署名，但是不得以任何方式暗示许可人为您或您的使用背书。
             <br/>
