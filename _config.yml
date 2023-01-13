@@ -228,12 +228,12 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
             - | # 网站小图标，可换成你自己的图片，改href中的部分即可
               <link
                 rel="apple-touch-icon-precomposed"
-                href="https://ywy0.github.io/favicon.ico"
+                href="https://ywy0.github.io/file/favicon.ico"
               />
               <link
                 rel="shortcut
                 icon"
-                href="https://ywy0.github.io/favicon.ico"
+                href="https://ywy0.github.io/file/favicon.ico"
               />
             - | # 来自lanyon的页面样式，不要改
               <link
