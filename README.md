@@ -7,8 +7,7 @@
 
 ## Sift
 
-[“吾爱桦”](https://ywy0.github.io/2022/04/16/0/) <br>
-[路人的乐子](https://ywy0.github.io/2023/08/27/0/)
+[《蜀地》](https://ywy0.github.io/2023/05/03/0/) <br>
 
 ## Aim
 
