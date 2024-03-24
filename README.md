@@ -26,8 +26,8 @@
 <!-- .slide vertical=true -->
 
 - Phone
-  - **+86 15119107811**
+  - **+86 151--------**
 - WeChat
-  - **lfcemy**
+  - **vunyit**
 - E-mail:
   - **[3082532836@qq.com](mailto:3082532836@qq.com)**
