@@ -15,9 +15,9 @@ description: |
   <br/>
 url: https://ywy0.github.io
 baseurl: ""
-name: "ye's theme"  # 主题名称修改
+name: "ye's theme"  # 主题名称
 
-# 全局路径变量 - 便于统一修改
+# 全局路径变量
 global_paths:
   avatar: /file/avatar.jpg
   favicon: /file/favicon.ico
@@ -25,9 +25,7 @@ global_paths:
 
 # 性能优化配置
 performance:
-  # 延迟加载非关键资源
   lazy_load: true
-  # 移除不必要的脚本
   remove_unused_scripts: true
 
 # 页面默认配置
@@ -35,446 +33,306 @@ defaults:
   - scope:
       path: ""  # 应用于所有文件
     values:
-      jekyll-theme-WuK:
-        # 1. 基础全局设置 - 青色基调
-        base_setting:
-          html_lang: zh
-          theme_base: theme-base-0c  # 青色主题基础
-          layout_reverse: true       # 侧边栏在右侧
-          sidebar_overlay: true      # 正文不随侧边栏移动
+      # 移除所有wuk主题命名空间，使用默认配置结构
+      layout: default
+      lang: zh
+      theme:
+        base: theme-base-0c  # 青色主题基础
+        layout_reverse: true  # 侧边栏在右侧
+        sidebar_overlay: true  # 正文不随侧边栏移动
         
-        # 2. 侧边栏配置 - 优化美术风格
-        sidebar:
-          disable: false
-          avatar:
-            enable: true
-            img: "{{ site.url }}{{ site.global_paths.avatar }}"
-            # 新增头像美化效果
-            style: |
-              border-radius: 12px;
-              box-shadow: 0 4px 15px rgba(0, 200, 200, 0.3);
-              transition: all 0.3s ease;
-              border: 2px solid rgba(0, 200, 200, 0.5);
-          nav:
-            - title: '<i class="fa-solid fa-home fa-fw"></i> 首页'
-              href: /
-            - title: '<i class="fa-solid fa-comment fa-fw"></i> 留言'
-              href: /comments/
-            - title: '<i class="fa-solid fa-archive fa-fw"></i> 归档'
-              href: /archive/
-            - title: '<i class="fa-solid fa-tags fa-fw"></i> 标签'
-              href: /tags/
-            - title: '<i class="fa-solid fa-coffee fa-fw"></i> 打赏'
-              href: /merger/
-          # 搜索框美化
-          simple_jekyll_search:
-            enable: true
-            full_text_search: false  # 关闭全文搜索提升速度
-            append: |
-              <style>
-                #sidebar-search-input {
-                  background: rgba(255, 255, 255, 0.1);
-                  border: 1px solid rgba(0, 200, 200, 0.5);
-                  color: White;
-                  width: 100%;
-                  padding: 6px 10px;
-                  border-radius: 4px;
-                  margin-bottom: 1rem;
-                }
-                #sidebar-search-input::placeholder {
-                  color: rgba(255, 255, 255, 0.7);
-                }
-                #sidebar-search-results-container {
-                  overflow: hidden hidden;
-                  max-height: 66.6vh;
-                }
-                #sidebar-search-results-container:hover {
-                  overflow: auto auto;
-                }
-                #sidebar-search-results-container li a {
-                  color: rgba(255, 255, 255, 0.9);
-                  padding: 4px 0;
-                  display: block;
-                }
-                #sidebar-search-results-container li a:hover {
-                  color: white;
-                  background: rgba(255, 255, 255, 0.1);
-                  padding-left: 8px;
-                }
-              </style>
-              <input id="sidebar-search-input" placeholder="搜索博文" />
-              <ol id="sidebar-search-results-container"></ol>
-              <script src='https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.9.1' async='async'
-                onload='SimpleJekyllSearch({
-                  json: "/assets/simple-jekyll-search/search.json",
-                  searchInput: document.getElementById("sidebar-search-input"),
-                  resultsContainer: document.getElementById("sidebar-search-results-container"),
-                  searchResultTemplate: `<li><a href="{url}">{title}</a></li>`,
-                  limit: 10,  # 减少搜索结果数量提升性能
-                  fuzzy: false  # 关闭模糊搜索提升速度
-                })'>
-              </script>
-          # 目录美化
-          jekyll-toc:
-            enable: true
-            prepend: |
-              <style>
-                #toc {
-                  overflow: hidden hidden;
-                  max-height: 66.6vh;
-                  padding-left: 0;
-                }
-                #toc:hover{
-                  overflow: auto auto;
-                }
-                #toc a {
-                  color: rgba(255, 255, 255, 0.8);
-                  border-bottom: none;
-                }
-                #toc a:hover {
-                  color: white;
-                  border-bottom: 1px solid rgba(0, 200, 200, 0.8);
-                }
-                #toc li {
-                  margin: 0.3rem 0;
-                  list-style-type: none;
-                }
-              </style>
-          # 关闭本地字数统计提升调试速度
-          wordcount:
-            enable: false
-            prepend: <i class="fa-solid fa-user-edit fa-fw"></i>
-            kilo: 千
-            unit: 字
-          # 侧边栏美化样式
-          append_to_sidebar:
-            - |  # 青色主题色设置
-              <style>
-                :root {
-                  --cyan-primary: #00c8c8;
-                  --cyan-light: #4dffff;
-                  --cyan-dark: #008080;
-                  --cyan-transparent: rgba(0, 200, 200, 0.2);
-                }
-                .theme-base-0c {
-                  --theme-base-color: var(--cyan-primary);
-                }
-                #sidebar-checkbox:checked ~ .sidebar-toggle,
-                .sidebar,
-                .sidebar-toggle:active {
-                  background-color: var(--cyan-dark);
-                  background-image: linear-gradient(180deg, var(--cyan-dark), #006666);
-                }
-              </style>
-            - |  # 侧边栏布局优化
-              <style>
-                .sidebar {
-                  overflow: hidden;
-                  min-height: 100vh;
-                  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-                  padding: 2rem 1rem;
-                }
-                .sidebar:hover{ 
-                  overflow-y: scroll; 
-                }
-                .sidebar a {
-                  color: rgba(255, 255, 255, 0.9);
-                  transition: all 0.2s ease;
-                }
-                .sidebar a:hover {
-                  color: white;
-                  text-decoration: none;
-                }
-                .sidebar-nav {
-                  margin: 2rem 0;
-                  padding-left: 0;
-                }
-                .sidebar-nav-item {
-                  list-style: none;
-                  margin: 0.5rem 0;
-                  padding: 0.3rem 0.5rem;
-                  border-radius: 4px;
-                  transition: all 0.2s ease;
-                }
-                .sidebar-nav-item:hover {
-                  background: rgba(255, 255, 255, 0.1);
-                  transform: translateX(4px);
-                }
-                .sidebar-nav-item a {
-                  display: block;
-                }
-              </style>
-            - |  # 侧边栏按钮美化
-              <style>
-                .sidebar-checkbox { display: none; }
-                .sidebar-toggle {
-                  position: fixed;
-                  top: 1.5rem;
-                  right: 1.5rem;
-                  width: 40px;
-                  height: 40px;
-                  border-radius: 50%;
-                  background: var(--cyan-primary);
-                  border: none;
-                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-                  z-index: 100;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: white;
-                  cursor: pointer;
-                }
-                .sidebar-toggle:hover {
-                  background: var(--cyan-light);
-                  transform: scale(1.05);
-                }
-              </style>
-            - |  # 统计和版权区域美化
-              <style>
-                .sidebar > div:last-child {
-                  margin-top: 2rem;
-                  padding-top: 1rem;
-                  border-top: 1px solid rgba(255, 255, 255, 0.1);
-                  color: rgba(255, 255, 255, 0.8);
-                  font-size: 0.9rem;
-                }
-                .sidebar .fa-spinner {
-                  color: var(--cyan-light);
-                }
-              </style>
-            - |  # 不蒜子统计
-              <div>
-                <div><i class="fa-solid fa-eye fa-fw"></i><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-pulse"></i></span>次</div>
-                <div><i class="fa-solid fa-paw fa-fw"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-pulse"></i></span>枚</div>
-                <div><i class="fa-solid fa-user-friends fa-fw"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-pulse"></i></span>人</div>
-                <script src='https://cdn.jsdelivr.net/npm/busuanzi@2.3/bsz.pure.mini.js' async='async'></script>
-              </div>
-            - |  # 版权声明
-              <div><i class="fa-solid fa-copyright fa-fw"></i> 2017-2023 ywy0</div>
-        
-        # 3. 头部附加内容 - 优化加载速度
-        append_to_head:
-          - |  # 关键CSS提前加载
+      # 侧边栏配置
+      sidebar:
+        disable: false
+        avatar:
+          enable: true
+          img: "{{ site.url }}{{ site.global_paths.avatar }}"
+          style: |
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 200, 200, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(0, 200, 200, 0.5);
+        nav:
+          - title: '<i class="fa-solid fa-home fa-fw"></i> 首页'
+            href: /
+          - title: '<i class="fa-solid fa-comment fa-fw"></i> 留言'
+            href: /comments/
+          - title: '<i class="fa-solid fa-archive fa-fw"></i> 归档'
+            href: /archive/
+          - title: '<i class="fa-solid fa-tags fa-fw"></i> 标签'
+            href: /tags/
+          # 已删除打赏相关导航项
+        search:
+          enable: true
+          full_text: false
+          template: |
             <style>
-              /* 核心样式提前加载，减少闪烁 */
-              body { margin: 0; }
-              .container { padding: 2rem; }
-              .sidebar { color: white; }
-              a { text-decoration: none; }
-              pre { overflow: auto; }
+              #sidebar-search-input {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(0, 200, 200, 0.5);
+                color: White;
+                width: 100%;
+                padding: 6px 10px;
+                border-radius: 4px;
+                margin-bottom: 1rem;
+              }
+              #sidebar-search-results-container {
+                overflow: hidden hidden;
+                max-height: 66.6vh;
+              }
+              #sidebar-search-results-container:hover {
+                overflow: auto auto;
+              }
             </style>
-          - |  # jsdelivr防挂脚本 - 保留核心功能
-            <script>
-              (n=>{"use strict";let r,s,e;const l=["cdn.jsdelivr.net","fastly.jsdelivr.net","gcore.jsdelivr.net"],t="//",a=l[0],i=Date.now(),o=2e3,c="jsdelivr-auto-fallback",f="/gh/PipecraftNet/jsdelivr-auto-fallback@main/empty.css?",d=e=>e&&e.includes(t+a),m=e=>e.replace(t+a,t+r),u=window.setTimeout,v=n.querySelectorAll.bind(n),g=()=>{let e,t;for(e of v('link[rel="stylesheet"]'))t=e.href,d(t)&&!t.includes(f)&&(e.href=m(t));for(e of v("script"))if(t=e.src,d(t)){const r=n.createElement("script");r.src=m(t),e.defer=!0,e.src="",e.before(r),e.remove()}},y=()=>{!e&&s&&r&&(console.warn(a+" is not available. Use "+r),e=!0,u(g,0))},b=(()=>{try{return Object.assign({},JSON.parse(localStorage.getItem(c)||"{}"))}catch{return{}}})();var h=()=>{b.time=i,b.failed=!1,b.fastNode=null;for(const t of l)((e,t)=>{let r;const s=n.createElement("link"),l=e=>{r&&(clearTimeout(r),r=0,e||(s.href="data:text/plain;base64,"),s.remove(),t(e))};r=u(l,o),s.addEventListener("error",()=>l(!1)),s.addEventListener("load",()=>l(!0)),s.rel="stylesheet",s.text="text/css",s.href=e+f+i,n.head.insertAdjacentElement("afterbegin",s)})("https://"+t,e=>{e||t!==a||(s=!0,b.failed=!0),e&&!r&&(r=t),e&&!b.fastNode&&(b.fastNode=t),y()});u(()=>{s&&!r&&(r=l[1],y()),localStorage.setItem(c,JSON.stringify(b))},o+100)};b.time&&i-b.time<36e5&&b.failed&&b.fastNode?(s=!0,r=b.fastNode,y(),u(h,1e3)):h()})(document);
+            <input id="sidebar-search-input" placeholder="搜索博文" />
+            <ol id="sidebar-search-results-container"></ol>
+            <script src='https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.9.1' async='async'
+              onload='SimpleJekyllSearch({
+                json: "/assets/simple-jekyll-search/search.json",
+                searchInput: document.getElementById("sidebar-search-input"),
+                resultsContainer: document.getElementById("sidebar-search-results-container"),
+                searchResultTemplate: `<li><a href="{url}">{title}</a></li>`,
+                limit: 10,
+                fuzzy: false
+              })'>
             </script>
-          - |  # 精简后的主题色定义
+        toc:
+          enable: true
+          style: |
             <style>
-              .theme-base-0c {
-                --theme-base-color: #00c8c8; /* 青色主色调 */
+              #toc {
+                overflow: hidden hidden;
+                max-height: 66.6vh;
               }
-              /* 链接和交互元素的青色样式 */
-              a:hover {
-                color: #008080 !important;
-              }
-              h1, h2, h3, h4, h5, h6 {
-                color: #006666;
-              }
-              blockquote {
-                border-left: 4px solid var(--theme-base-color);
+              #toc:hover{
+                overflow: auto auto;
               }
             </style>
-          - |  # 页面优化标签
-            <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
-            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-            <link rel="alternate" href="/feed.xml" title="RSS" type="application/rss+xml" />
-          - |  # 网站图标
-            <link rel="apple-touch-icon-precomposed" href="{{ site.url }}{{ site.global_paths.favicon }}" />
-            <link rel="shortcut icon" href="{{ site.url }}{{ site.global_paths.favicon }}" />
-          - |  # 合并并精简外部资源
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/poole/lanyon@v1.1.0/public/css/poole.min.css,gh/poole/lanyon@v1.1.0/public/css/lanyon.min.css,npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
-          - |  # 字体设置 - 减少字体数量提升速度
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@4.5.12/chinese-simplified-500.min.css" />
-            <style>
-              body, .sidebar, html, h1, h2, h3, h4, h5, h6, code, pre {
-                font-family: "Noto Serif SC", "Songti SC", serif;
-              }
-            </style>
-          - |  # 基础样式优化
-            <style>
-              img { 
-                display: inline-block; 
-                margin: 0; 
-                max-width: 100%;
-              }
-              ::-webkit-scrollbar { 
-                width: 5px; 
-                height: 5px; 
-              }
-              ::-webkit-scrollbar-thumb { 
-                background-color: var(--theme-base-color); 
-                border-radius: 3px;
-              }
-              pre { 
-                max-height: 60vh;
-                border-radius: 6px;
-                border: 1px solid #eee;
-              }
-              .container a {
-                color: var(--cyan-dark);
-                border-bottom: 1px solid var(--cyan-primary);
-              }
-              .container a:hover {
-                border-bottom: 2px solid var(--cyan-primary);
-              }
-            </style>
+        stats:
+          enable: true
+          template: |
+            <div>
+              <div><i class="fa-solid fa-eye fa-fw"></i><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-pulse"></i></span>次</div>
+              <div><i class="fa-solid fa-paw fa-fw"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-pulse"></i></span>枚</div>
+              <div><i class="fa-solid fa-user-friends fa-fw"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-pulse"></i></span>人</div>
+              <script src='https://cdn.jsdelivr.net/npm/busuanzi@2.3/bsz.pure.mini.js' async='async'></script>
+            </div>
+        copyright: |
+          <div><i class="fa-solid fa-copyright fa-fw"></i> 2017-2023 ywy0</div>
+        style: |
+          <style>
+            :root {
+              --cyan-primary: #00c8c8;
+              --cyan-light: #4dffff;
+              --cyan-dark: #008080;
+              --cyan-transparent: rgba(0, 200, 200, 0.2);
+            }
+            .theme-base-0c {
+              --theme-base-color: var(--cyan-primary);
+            }
+            .sidebar {
+              background-color: var(--cyan-dark);
+              background-image: linear-gradient(180deg, var(--cyan-dark), #006666);
+              color: white;
+              overflow: hidden;
+              min-height: 100vh;
+              box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+              padding: 2rem 1rem;
+            }
+            .sidebar:hover {
+              overflow-y: scroll;
+            }
+            .sidebar a {
+              color: rgba(255, 255, 255, 0.9);
+              transition: all 0.2s ease;
+              text-decoration: none;
+            }
+            .sidebar a:hover {
+              color: white;
+            }
+            .sidebar-nav {
+              margin: 2rem 0;
+              padding-left: 0;
+            }
+            .sidebar-nav-item {
+              list-style: none;
+              margin: 0.5rem 0;
+              padding: 0.3rem 0.5rem;
+              border-radius: 4px;
+              transition: all 0.2s ease;
+            }
+            .sidebar-nav-item:hover {
+              background: rgba(255, 255, 255, 0.1);
+              transform: translateX(4px);
+            }
+            .sidebar-toggle {
+              position: fixed;
+              top: 1.5rem;
+              right: 1.5rem;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              background: var(--cyan-primary);
+              border: none;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+              z-index: 100;
+              color: white;
+              cursor: pointer;
+            }
+            .sidebar-toggle:hover {
+              background: var(--cyan-light);
+              transform: scale(1.05);
+            }
+          </style>
+        
+      # 头部附加内容
+      head_includes:
+        - |  # 关键CSS
+          <style>
+            body { margin: 0; }
+            .container { padding: 2rem; }
+            a { text-decoration: none; }
+            pre { overflow: auto; }
+          </style>
+        - |  # CDN防挂脚本
+          <script>
+            (n=>{"use strict";let r,s,e;const l=["cdn.jsdelivr.net","fastly.jsdelivr.net","gcore.jsdelivr.net"],t="//",a=l[0],i=Date.now(),o=2e3,c="jsdelivr-auto-fallback",f="/gh/PipecraftNet/jsdelivr-auto-fallback@main/empty.css?",d=e=>e&&e.includes(t+a),m=e=>e.replace(t+a,t+r),u=window.setTimeout,v=n.querySelectorAll.bind(n),g=()=>{let e,t;for(e of v('link[rel="stylesheet"]'))t=e.href,d(t)&&!t.includes(f)&&(e.href=m(t));for(e of v("script"))if(t=e.src,d(t)){const r=n.createElement("script");r.src=m(t),e.defer=!0,e.src="",e.before(r),e.remove()}},y=()=>{!e&&s&&r&&(console.warn(a+" is not available. Use "+r),e=!0,u(g,0))},b=(()=>{try{return Object.assign({},JSON.parse(localStorage.getItem(c)||"{}"))}catch{return{}}})();var h=()=>{b.time=i,b.failed=!1,b.fastNode=null;for(const t of l)((e,t)=>{let r;const s=n.createElement("link"),l=e=>{r&&(clearTimeout(r),r=0,e||(s.href="data:text/plain;base64,"),s.remove(),t(e))};r=u(l,o),s.addEventListener("error",()=>l(!1)),s.addEventListener("load",()=>l(!0)),s.rel="stylesheet",s.text="text/css",s.href=e+f+i,n.head.insertAdjacentElement("afterbegin",s)})("https://"+t,e=>{e||t!==a||(s=!0,b.failed=!0),e&&!r&&(r=t),e&&!b.fastNode&&(b.fastNode=t),y()});u(()=>{s&&!r&&(r=l[1],y()),localStorage.setItem(c,JSON.stringify(b))},o+100)};b.time&&i-b.time<36e5&&b.failed&&b.fastNode?(s=!0,r=b.fastNode,y(),u(h,1e3)):h()})(document);
+          </script>
+        - |  # 主题色定义
+          <style>
+            .theme-base-0c {
+              --theme-base-color: #00c8c8;
+            }
+            a:hover {
+              color: #008080 !important;
+            }
+            h1, h2, h3, h4, h5, h6 {
+              color: #006666;
+            }
+            blockquote {
+              border-left: 4px solid var(--theme-base-color);
+            }
+          </style>
+        - |  # 页面元标签
+          <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+          <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+          <link rel="alternate" href="/feed.xml" title="RSS" type="application/rss+xml" />
+        - |  # 网站图标
+          <link rel="apple-touch-icon-precomposed" href="{{ site.url }}{{ site.global_paths.favicon }}" />
+          <link rel="shortcut icon" href="{{ site.url }}{{ site.global_paths.favicon }}" />
+        - |  # 外部资源
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/poole/lanyon@v1.1.0/public/css/poole.min.css,gh/poole/lanyon@v1.1.0/public/css/lanyon.min.css,npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
+        - |  # 字体设置
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@4.5.12/chinese-simplified-500.min.css" />
+          <style>
+            body, .sidebar, html, h1, h2, h3, h4, h5, h6, code, pre {
+              font-family: "Noto Serif SC", "Songti SC", serif;
+            }
+          </style>
 
-  # 4. 页面特定配置 - 减少不必要的脚本
+  # 页面特定配置
   - scope:
       path: ""
     values:
-      jekyll-theme-WuK:
-        page:
-          title:
-            enable: true
-          prepend:
-            - |  # 精简页面样式
-              <style>
-                h1::before, h2::before, h3::before {
-                  font-family: "Font Awesome 6 Free";
-                  font-weight: bold;
-                  margin-right: .5rem;
-                  content: "\f0e7";
-                  color: var(--theme-base-color);
-                }
-                blockquote::before { 
-                  content: "\f10d"; 
-                  margin-right: .5rem;
-                  color: var(--theme-base-color);
-                }
-                h1, h2, h3, h4 { 
-                  margin: 1.5rem 0rem 0.8rem 0rem; 
-                  border-bottom: 1px solid #eee;
-                  padding-bottom: 0.3rem;
-                }
-                ::selection { 
-                  color: White; 
-                  background: var(--cyan-dark); 
-                }
-              </style>
-            - |  # 表格和列表样式
-              <style>
-                table { 
-                  width: 100%;
-                  border-collapse: collapse;
-                  margin: 1rem 0;
-                }
-                table th, table td {
-                  padding: 8px 12px;
-                  border: 1px solid #e0e0e0;
-                }
-                table th {
-                  background-color: var(--cyan-transparent);
-                }
-                .content li { 
-                  margin: 0.4rem 0; 
-                }
-                p { 
-                  text-indent: 2rem; 
-                  line-height: 1.7;
-                }
-              </style>
-            - |  # 容器和响应式样式
-              <style>
-                .container { 
-                  min-width: 66.6%; 
-                  max-width: 1000px;
-                  margin: 0 auto;
-                }
-                .container.content { 
-                  padding: 2rem; 
-                }
-                @media screen and (max-width: 768px) {
-                  .container { 
-                    min-width: 100%;
-                    padding: 0 1rem;
-                  }
-                  .container.content { 
-                    padding: 1rem; 
-                  }
-                  table { 
-                    font-size: 0.9rem;
-                  }
-                }
-              </style>
+      page:
+        title:
+          enable: true
+        style: |
+          <style>
+            h1::before, h2::before, h3::before {
+              font-family: "Font Awesome 6 Free";
+              font-weight: bold;
+              margin-right: .5rem;
+              content: "\f0e7";
+              color: var(--theme-base-color);
+            }
+            blockquote::before { 
+              content: "\f10d"; 
+              margin-right: .5rem;
+              color: var(--theme-base-color);
+            }
+            h1, h2, h3, h4 { 
+              margin: 1.5rem 0rem 0.8rem 0rem; 
+              border-bottom: 1px solid #eee;
+              padding-bottom: 0.3rem;
+            }
+            ::selection { 
+              color: White; 
+              background: var(--cyan-dark); 
+            }
+            table { 
+              width: 100%;
+              border-collapse: collapse;
+              margin: 1rem 0;
+            }
+            table th, table td {
+              padding: 8px 12px;
+              border: 1px solid #e0e0e0;
+            }
+            table th {
+              background-color: var(--cyan-transparent);
+            }
+            .content li { 
+              margin: 0.4rem 0; 
+            }
+            p { 
+              text-indent: 2rem; 
+              line-height: 1.7;
+            }
+            .container { 
+              min-width: 66.6%; 
+              max-width: 1000px;
+              margin: 0 auto;
+            }
+            @media screen and (max-width: 768px) {
+              .container { 
+                min-width: 100%;
+                padding: 0 1rem;
+              }
+            }
+          </style>
 
-  # 5. 文章特定配置 - 仅加载必要功能
+  # 文章特定配置
   - scope:
       path: "_posts"
     values:
-      jekyll-theme-WuK:
-        post:
-          date:
-            enable: true
-            prepend: <i class="fa-solid fa-calendar-day fa-fw"></i>
-          wordcount:
-            enable: true
-            prepend: <i class="fa-solid fa-file-word fa-fw"></i>
-            unit: 字
-          readtime:
-            enable: true
-            prepend: <i class="fa-solid fa-clock fa-fw"></i>
-            unit: 分
-            divided_by: 300
-          copyright: |
-            <br/>
-            <i class="fab fa-creative-commons-by fa-fw"></i>
-            <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="license">CC BY 4.0</a>
-            （除特别声明或转载文章外）
-            <br/>
-            <i class="fa-solid fa-coffee fa-fw"></i>
-            <a href="/merger/">如果这篇博客帮助到你，可以请我喝一杯咖啡~</a>
+      post:
+        date:
+          enable: true
+          prepend: <i class="fa-solid fa-calendar-day fa-fw"></i>
+        wordcount:
+          enable: true
+          prepend: <i class="fa-solid fa-file-word fa-fw"></i>
+          unit: 字
+        readtime:
+          enable: true
+          prepend: <i class="fa-solid fa-clock fa-fw"></i>
+          unit: 分
+          divided_by: 300
+        copyright: |
+          <br/>
+          <i class="fab fa-creative-commons-by fa-fw"></i>
+          <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="license">CC BY 4.0</a>
+          （除特别声明或转载文章外）
+          <!-- 已删除打赏相关内容 -->
 
-  # 6. 首页和评论页配置 - 精简资源
-  - scope:
-      path: ""
-      type: home
-    values:
-      jekyll-theme-WuK:
-        home:
-          # 保留必要的reveal.js功能，移除冗余配置
-          append_to_section_tag:
-            - key: data-markdown
-            - key: data-separator
-              value: <!-- .slide -->
-          prepend: |
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.4.0/dist/reveal.min.css" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.4.0/dist/theme/white.min.css" />
-          append: |
-            <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.4.0/dist/reveal.min.js" async="async"
-              onload="Reveal.initialize({
-                height: '100%',
-                mouseWheel: true,
-                navigationMode: 'linear'
-              });">
-            </script>
-
+  # 评论页配置
   - scope:
       path: "comments"
     values:
-      jekyll-theme-WuK:
-        comments:
-          enable: true
-          append: |
-            <script
-              repo="{{ site.global_paths.repo }}"
-              src="https://utteranc.es/client.js"
-              issue-term="url"
-              theme="github-light"
-              crossorigin="anonymous"
-              async="async"
-            ></script>
+      comments:
+        enable: true
+        template: |
+          <script
+            repo="{{ site.global_paths.repo }}"
+            src="https://utteranc.es/client.js"
+            issue-term="url"
+            theme="github-light"
+            crossorigin="anonymous"
+            async="async"
+          ></script>
 
-# HTML压缩配置 - 生产环境启用
+# HTML压缩配置
 compress_html:
   clippings: all
   comments: ["<!-- keep -->"]
@@ -485,7 +343,7 @@ compress_html:
   profile: false
   startings: []
 
-# 插件配置 - 仅保留必要插件
+# 插件配置
 plugins:
   - jekyll-readme-index
   - jekyll-seo-tag
@@ -493,9 +351,10 @@ plugins:
   - jekyll-feed
   - jekyll-remote-theme
 
-remote_theme: https://github.com/wu-kan/jekyll-theme-WuK@4.2.0
+# 移除WuK主题引用，使用基础主题
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"  # 替换为流行的基础主题
 
-# 其他优化配置
+# 其他配置
 readme_index:
   with_frontmatter: true
 
@@ -507,7 +366,6 @@ permalink: pretty
 timezone: Asia/Shanghai
 future: true
 
-# 简化markdown解析配置提升速度
 markdown: kramdown
 kramdown:
   input: GFM
