@@ -197,7 +197,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   2017-2023 ywy0
                 </div>
             wordcount: # 全站字数统计
-              enable: false # 优化点1：本地调试时关闭以提高构建速度，部署时可改为true
+              enable: false # 已关闭全站字数统计
               prepend: <i class="fa-solid fa-user-edit fa-fw"></i>
               kilo: 千
               unit: 字
@@ -570,7 +570,7 @@ compress_html: # <https://github.com/penibelst/jekyll-compress-html>
   comments: [] # 注释不能压缩，否则 reveal.js 的 ppt切屏受影响
   endings: all
   ignore:
-    envs: [development] # 优化点2：仅本地调试时不压缩，部署时自动压缩
+    envs: all # 已完全关闭HTML压缩
   blanklines: false
   profile: false
   startings: []
