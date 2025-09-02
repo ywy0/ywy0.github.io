@@ -197,7 +197,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   2017-2023 ywy0
                 </div>
             wordcount: # 全站字数统计
-              enable: false # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
+              enable: false # 优化点1：本地调试时关闭以提高构建速度，部署时可改为true
               prepend: <i class="fa-solid fa-user-edit fa-fw"></i>
               kilo: 千
               unit: 字
@@ -283,13 +283,22 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   font-family: "Courier Prime", "Courier New", "Courier", "Noto Sans Mono", "Noto Serif TC", "Noto Serif SC", "Noto Serif CJK TC", "Noto Serif CJK SC", "Source Han Serif SC", "Source Han Serif CN", STZhongsong, STSong, "Songti SC", "AR PL New Sung", "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", PMingLiU, MingLiU, monospace;
                 }
               </style>
-            - | # 修复行内图片默认样式
+            - | # 修复行内图片默认样式 + 延迟加载优化
               <style>
                 img {
                   display: inline-block;
                   margin: 0;
+                  max-width: 100%; /* 防止图片溢出容器 */
                 }
               </style>
+              <script>
+                // 为所有图片添加延迟加载（兼容现代浏览器）
+                document.addEventListener('DOMContentLoaded', () => {
+                  document.querySelectorAll('img').forEach(img => {
+                    if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+                  });
+                });
+              </script>
             - | # 自定义滚动条，仅对Chrome系浏览器生效
               <style>
                 ::-webkit-scrollbar {
@@ -561,7 +570,7 @@ compress_html: # <https://github.com/penibelst/jekyll-compress-html>
   comments: [] # 注释不能压缩，否则 reveal.js 的 ppt切屏受影响
   endings: all
   ignore:
-    envs: all # 暂时关掉页面压缩
+    envs: [development] # 优化点2：仅本地调试时不压缩，部署时自动压缩
   blanklines: false
   profile: false
   startings: []
