@@ -16,18 +16,21 @@ global_paths:
   favicon: /file/favicon.ico
   repo: ywy0/utterances
 
-# 页面默认配置
+# 核心修复：页面默认配置（解决侧边栏固定+文章页崩溃）
 defaults:
   - scope:
-      path: ""
+      path: "" # 所有页面通用
     values:
       jekyll-theme-WuK:
+        # 1. 基础布局（关键：修复侧边栏与正文层级）
         base_setting:
           html_lang: zh
-          theme_base: theme-base-0c
-          layout_reverse: true
-          sidebar_overlay: true
+          theme_base: theme-base-0c # 青色主题
+          layout_reverse: true # 侧边栏在右侧
+          sidebar_overlay: false # 关闭覆盖，避免正文被压
+          sidebar_fixed: true # 强制侧边栏固定
         
+        # 2. 侧边栏配置（核心：固定定位+不随页面滚动）
         sidebar:
           disable: false
           avatar:
@@ -35,10 +38,9 @@ defaults:
             img: "{{ site.url }}{{ site.global_paths.avatar }}"
             style: |
               border-radius: 12px;
-              box-shadow: 0 4px 15px rgba(0, 200, 200, 0.3);
-              transition: all 0.3s ease;
-              border: 2px solid rgba(0, 200, 200, 0.5);
-              margin: 0 auto;
+              box-shadow: 0 4px 15px rgba(0,200,200,0.3);
+              width: 120px;
+              margin: 0 auto 1rem; # 居中+底部间距
           nav:
             - title: '<i class="fa-solid fa-home fa-fw"></i> 首页'
               href: /
@@ -48,6 +50,7 @@ defaults:
               href: /archive/
             - title: '<i class="fa-solid fa-tags fa-fw"></i> 标签'
               href: /tags/
+          # 搜索框（避免溢出）
           simple_jekyll_search:
             enable: true
             full_text_search: false
@@ -56,15 +59,17 @@ defaults:
                 #sidebar-search-input {
                   background: rgba(255,255,255,0.1);
                   border: 1px solid rgba(0,200,200,0.5);
-                  color: White;
-                  width: 100%;
-                  padding: 6px 10px;
+                  color: white;
+                  width: 90%;
+                  padding: 6px 8px;
                   border-radius: 4px;
-                  margin-bottom: 1rem;
+                  margin: 0 auto 1rem;
+                  display: block;
                 }
                 #sidebar-search-results-container {
-                  overflow: hidden;
-                  max-height: 40vh;
+                  max-height: 20vh;
+                  overflow-y: auto;
+                  padding-left: 10%;
                 }
               </style>
               <input id="sidebar-search-input" placeholder="搜索博文" />
@@ -75,41 +80,70 @@ defaults:
                   searchInput: document.getElementById("sidebar-search-input"),
                   resultsContainer: document.getElementById("sidebar-search-results-container"),
                   searchResultTemplate: `<li><a href="{url}">{title}</a></li>`,
-                  limit: 10,
+                  limit: 8,
                   fuzzy: false
                 })'>
               </script>
+          # 目录（适配固定侧边栏）
           jekyll-toc:
             enable: true
             prepend: |
               <style>
-                #toc { overflow: hidden; max-height: 40vh; padding-left: 0; }
-                #toc a { color: rgba(255,255,255,0.8); border-bottom: none; }
+                #toc {
+                  max-height: 30vh;
+                  overflow-y: auto;
+                  padding-left: 10%;
+                  margin-top: 1rem;
+                }
+                #toc a {
+                  color: rgba(255,255,255,0.9);
+                  border-bottom: none;
+                  line-height: 1.6;
+                }
               </style>
-          wordcount:
-            enable: false
+          # 侧边栏固定核心样式（关键修复）
           append_to_sidebar:
             - |
               <style>
-                :root {
-                  --cyan-primary: #00c8c8;
-                  --cyan-dark: #008080;
-                }
-                .theme-base-0c { --theme-base-color: var(--cyan-primary); }
+                /* 侧边栏固定定位：不随页面滚动 */
                 .sidebar {
-                  background: linear-gradient(180deg, var(--cyan-dark), #006666);
+                  position: fixed !important;
+                  top: 0;
+                  right: 0;
+                  width: 280px !important;
+                  height: 100vh !important;
+                  overflow-y: auto;
+                  background: linear-gradient(180deg, #008080, #006666);
                   color: white;
-                  min-height: 100vh;
-                  padding: 1.5rem 1rem;
+                  padding: 1.5rem 0;
+                  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+                  z-index: 99;
+                }
+                /* 导航项样式：避免错乱 */
+                .sidebar-nav {
+                  padding-left: 10%;
+                  margin: 1rem 0;
                 }
                 .sidebar-nav-item {
                   list-style: none;
-                  margin: 0.4rem 0;
-                  padding: 0.3rem 0.5rem;
+                  margin: 0.6rem 0;
+                  padding: 0.4rem 0.8rem;
                   border-radius: 4px;
+                }
+                .sidebar-nav-item:hover {
+                  background: rgba(255,255,255,0.1);
+                  transform: translateX(3px);
+                }
+                /* 统计和版权：底部对齐 */
+                .sidebar > div:last-child {
+                  margin: 2rem 0 1rem;
+                  padding-left: 10%;
+                  font-size: 0.9rem;
+                  color: rgba(255,255,255,0.8);
                 }
               </style>
             - |
+              <!-- 统计代码：避免挤压 -->
               <div>
                 <div><i class="fa-solid fa-eye fa-fw"></i><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-pulse"></i></span>次</div>
                 <div><i class="fa-solid fa-paw fa-fw"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-pulse"></i></span>枚</div>
@@ -118,31 +152,211 @@ defaults:
               </div>
               <div><i class="fa-solid fa-copyright fa-fw"></i> 2017-2023 ywy0</div>
         
+        # 3. 头部样式（修复文章页布局崩溃）
         append_to_head:
           - |
             <style>
-              body { margin: 0; }
-              a { text-decoration: none; }
-              h1,h2,h3 { color: #006666; }
-              blockquote { border-left: 4px solid #00c8c8; }
+              /* 全局重置：解决元素重叠 */
+              * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+              }
+              /* 正文容器：给侧边栏留空间（关键！） */
+              .container {
+                width: calc(100% - 300px) !important; /* 侧边栏280px + 20px间距 */
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 2rem 3rem;
+                min-height: 100vh;
+              }
+              /* 文章页样式：修复排版崩溃 */
+              .post-content {
+                line-height: 1.8;
+                font-size: 1.05rem;
+                color: #333;
+              }
+              /* 图片：避免溢出 */
+              .post-content img {
+                max-width: 100% !important;
+                height: auto;
+                margin: 1rem auto;
+                display: block;
+                border-radius: 4px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+              }
+              /* 代码块：修复溢出 */
+              .post-content pre {
+                max-width: 100% !important;
+                padding: 1rem;
+                margin: 1rem 0;
+                border-radius: 4px;
+                background: #f8f8f8;
+                overflow-x: auto;
+              }
+              /* 表格：修复错乱 */
+              .post-content table {
+                width: 100% !important;
+                border-collapse: collapse;
+                margin: 1.5rem 0;
+                font-size: 0.95rem;
+              }
+              .post-content th, .post-content td {
+                padding: 0.8rem 1rem;
+                border: 1px solid #eee;
+                text-align: left;
+              }
+              .post-content th {
+                background: rgba(0,200,200,0.05);
+              }
+              /* 标题：修复重叠 */
+              h1, h2, h3, h4 {
+                margin: 1.8rem 0 1rem;
+                color: #006666;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0.5rem;
+              }
+              h1 {
+                font-size: 1.8rem;
+              }
+              h2 {
+                font-size: 1.5rem;
+              }
+              /* 段落：修复缩进和间距 */
+              p {
+                margin: 1rem 0;
+                text-indent: 2rem;
+              }
+              /* 列表：修复间距 */
+              ul, ol {
+                margin: 1rem 0 1rem 2rem;
+              }
+              /* 引用：修复样式 */
+              blockquote {
+                border-left: 4px solid #00c8c8;
+                padding: 0.8rem 1.2rem;
+                margin: 1rem 0;
+                background: rgba(0,200,200,0.03);
+                color: #666;
+              }
+              /* 移动端适配：避免侧边栏遮挡 */
+              @media screen and (max-width: 992px) {
+                .sidebar {
+                  width: 240px !important;
+                }
+                .container {
+                  width: calc(100% - 260px) !important;
+                  padding: 1.5rem 1rem;
+                }
+              }
+              @media screen and (max-width: 768px) {
+                .sidebar {
+                  transform: translateX(100%);
+                  transition: transform 0.3s ease;
+                }
+                #sidebar-checkbox:checked ~ .sidebar {
+                  transform: translateX(0);
+                }
+                .container {
+                  width: 100% !important;
+                  padding: 1.5rem;
+                }
+              }
             </style>
           - |
-            <meta name="viewport" content="width=device-width,minimum-scale=1" />
+            <!-- 必要元标签：避免缩放问题 -->
+            <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+            <!-- 图标：避免404 -->
             <link rel="shortcut icon" href="{{ site.url }}{{ site.global_paths.favicon }}" />
+            <link rel="apple-touch-icon-precomposed" href="{{ site.url }}{{ site.global_paths.favicon }}" />
+            <!-- 外部资源：合并请求，避免加载混乱 -->
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/poole/lanyon@v1.1.0/public/css/poole.min.css,gh/poole/lanyon@v1.1.0/public/css/lanyon.min.css,npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
+            <!-- 字体：统一样式 -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@4.5.12/chinese-simplified-500.min.css" />
+            <style>
+              body, .sidebar, .post-content {
+                font-family: "Noto Serif SC", "Songti SC", serif;
+              }
+            </style>
 
+  # 4. 文章页专属配置（修复/posts下页面崩溃）
   - scope:
       path: "_posts"
     values:
       jekyll-theme-WuK:
         post:
-          date: { enable: true, prepend: '<i class="fa-solid fa-calendar-day fa-fw"></i>' }
-          wordcount: { enable: true, prepend: '<i class="fa-solid fa-file-word fa-fw"></i>', unit: '字' }
-          readtime: { enable: true, prepend: '<i class="fa-solid fa-clock fa-fw"></i>', unit: '分', divided_by: 300 }
+          # 文章信息：避免排版错乱
+          date:
+            enable: true
+            prepend: '<i class="fa-solid fa-calendar-day fa-fw"></i>'
+            style: "margin-right: 1rem; color: #666;"
+          wordcount:
+            enable: true
+            prepend: '<i class="fa-solid fa-file-word fa-fw"></i>'
+            unit: '字'
+            style: "margin-right: 1rem; color: #666;"
+          readtime:
+            enable: true
+            prepend: '<i class="fa-solid fa-clock fa-fw"></i>'
+            unit: '分'
+            divided_by: 300
+            style: "color: #666;"
+          # 文章底部版权：避免挤压
           copyright: |
-            <br/><i class="fab fa-creative-commons-by fa-fw"></i>
-            <a href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC BY 4.0</a>
+            <div style="margin: 2rem 0; padding-top: 1rem; border-top: 1px solid #eee; color: #666;">
+              <i class="fab fa-creative-commons-by fa-fw"></i>
+              <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" style="color: #008080; border-bottom: 1px solid #008080;">CC BY 4.0</a>
+              （除特别声明或转载文章外）
+            </div>
 
+  # 5. 标签页专属配置（修复/tags页面错乱）
+  - scope:
+      path: "tags"
+    values:
+      jekyll-theme-WuK:
+        tags:
+          # 标签云样式：避免重叠
+          style: |
+            <style>
+              .tag-cloud {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                margin: 2rem 0;
+              }
+              .tag-cloud a {
+                padding: 0.5rem 1rem;
+                background: rgba(0,200,200,0.05);
+                color: #008080;
+                border-radius: 20px;
+                transition: all 0.2s ease;
+                border-bottom: none;
+              }
+              .tag-cloud a:hover {
+                background: #008080;
+                color: white;
+              }
+              .tag-posts {
+                margin: 2rem 0;
+              }
+              .tag-posts li {
+                margin: 0.8rem 0;
+                padding: 0.5rem 0;
+                border-bottom: 1px dashed #eee;
+              }
+              .tag-posts a {
+                color: #333;
+                border-bottom: 1px solid #00c8c8;
+              }
+              .tag-posts time {
+                color: #999;
+                font-size: 0.9rem;
+                margin-left: 1rem;
+              }
+            </style>
+
+  # 6. 评论页配置（保持功能）
   - scope:
       path: "comments"
     values:
@@ -150,17 +364,26 @@ defaults:
         comments:
           enable: true
           append: |
-            <script repo="{{ site.global_paths.repo }}"
-              src="https://utteranc.es/client.js"
-              issue-term="url" theme="github-light"
-              crossorigin="anonymous" async>
-            </script>
+            <div style="margin-top: 2rem; padding: 1rem; border-radius: 4px; background: #f9f9f9;">
+              <script repo="{{ site.global_paths.repo }}"
+                src="https://utteranc.es/client.js"
+                issue-term="url"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+              </script>
+            </div>
 
-# 插件与构建配置
+# 构建配置：避免压缩导致的样式错乱
 compress_html:
   clippings: all
-  ignore: { envs: [development] }
+  comments: ["<!-- keep -->"]
+  ignore:
+    envs: [development] # 开发环境不压缩，便于调试
+  blanklines: false
+  profile: false
 
+# 插件：只保留必要的，避免冲突
 plugins:
   - jekyll-readme-index
   - jekyll-seo-tag
@@ -168,14 +391,7 @@ plugins:
   - jekyll-feed
   - jekyll-remote-theme
 
+# 恢复WuK主题：确保兼容性
 remote_theme: https://github.com/wu-kan/jekyll-theme-WuK@4.2.0
 
-webmaster_verifications:
-  google: YIKi1rBnyUaS-DMYiluseI5kZzTwjCkTFmKkSkMZDJk
-  baidu: szbTSfUGAB
-
-permalink: pretty
-timezone: Asia/Shanghai
-future: true
-markdown: kramdown
-kramdown: { input: GFM }
+# 其他配置：
