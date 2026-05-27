@@ -1,0 +1,13 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/sidebar.css" />
+<link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/syntax.css" />
+<link rel="alternate" href="/feed.xml" title="RSS" type="application/rss+xml" />
+{% if page.layout == 'home' %}
+<meta name="description" content="{{ site.description | strip_html | strip_newlines | truncate: 200 }}" />
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>

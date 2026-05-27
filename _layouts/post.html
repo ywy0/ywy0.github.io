@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<article class="post">
+  <div class="post-meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+    {% if page.tags.size > 0 %}
+    <span class="post-tags">
+      {% for tag in page.tags %}
+      <a href="/tags/#{{ tag }}">#{{ tag }}</a>
+      {% endfor %}
+    </span>
+    {% endif %}
+  </div>
+  <div class="post-content">
+    {{ content }}
+  </div>
+  {% if page.previous or page.next %}
+  <nav class="post-nav">
+    {% if page.previous %}
+    <a class="prev" href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
+    {% endif %}
+    {% if page.next %}
+    <a class="next" href="{{ page.next.url }}">{{ page.next.title }} →</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+</article>

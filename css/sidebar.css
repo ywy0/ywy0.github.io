@@ -1,0 +1,58 @@
+/* ===================================
+ *  sidebar.css — 左侧导航栏
+ * =================================== */
+
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1.2rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-text);
+}
+.site-logo:hover {
+  text-decoration: none;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0.5rem 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  border-left: 3px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.nav-item:hover {
+  background: #eee;
+  text-decoration: none;
+  border-left-color: var(--color-text);
+}
+
+.nav-item.active {
+  background: #eaeaea;
+  border-left-color: var(--color-text);
+  font-weight: 600;
+}

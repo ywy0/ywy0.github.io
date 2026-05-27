@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <input type="checkbox" id="sidebar-toggle" class="sidebar-checkbox" />
+  <div class="layout-wrapper">
+    {% include sidebar.html %}
+    <div class="main-area">
+      <label for="sidebar-toggle" class="sidebar-toggle-btn">☰</label>
+      <main class="content" aria-label="Content">
+        {% unless page.layout == 'home' %}
+        <h1 class="page-title">{{ page.title }}</h1>
+        {% endunless %}
+        {{ content }}
+      </main>
+      {% include footer.html %}
+    </div>
+  </div>
+  <label for="sidebar-toggle" class="sidebar-overlay"></label>
+</body>
+</html>

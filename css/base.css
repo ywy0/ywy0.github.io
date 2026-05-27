@@ -1,0 +1,221 @@
+/* ===================================
+ *  base.css — 基础重置与排版
+ * =================================== */
+
+:root {
+  --color-bg:          #fff;
+  --color-text:        #111;
+  --color-text-light:  #555;
+  --color-text-lighter:#888;
+  --color-border:      #ddd;
+  --color-sidebar-bg:  #f8f8f8;
+  --color-code-bg:     #f4f4f4;
+  --color-hover:       #000;
+  --sidebar-width:     260px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-hover);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 1rem auto;
+}
+
+code, pre {
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--color-code-bg);
+  padding: 1rem;
+  overflow-x: auto;
+  line-height: 1.5;
+  font-size: 0.85rem;
+}
+
+code {
+  background: var(--color-code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--color-text-light);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.4;
+  margin: 2rem 0 0.8rem;
+  font-weight: 600;
+}
+h1 { font-size: 1.8rem; margin-top: 0; }
+h2 { font-size: 1.4rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.3rem; }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0.8rem 0; }
+
+ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+li { margin: 0.3rem 0; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+}
+th { background: var(--color-sidebar-bg); font-weight: 600; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+/* ---- Better nested list spacing ---- */
+ul ul, ul ol, ol ul, ol ol {
+  margin: 0.2rem 0;
+}
+
+/* Line breaks in poems */
+br {
+  content: "";
+  display: block;
+  margin: 0.25rem 0;
+}
+
+/* Blockquote inner spacing */
+blockquote p {
+  margin: 0.3rem 0;
+}
+
+/* Image inside blockquote (avatar effect paragraph) */
+blockquote img {
+  margin: 0.5rem auto;
+}
+
+/* Horizontal scroll for wide tables */
+table {
+  display: block;
+  overflow-x: auto;
+}
+
+/* Friend links page / intro page list spacing */
+.content ul li > a:only-child {
+  font-weight: 500;
+}
+
+::selection {
+  background: #111;
+  color: #fff;
+}
+
+/* ---- Layout ---- */
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.content {
+  flex: 1;
+  max-width: 800px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+}
+
+/* ---- Responsive ---- */
+.sidebar-toggle-btn {
+  display: none;
+  position: fixed;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 20;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  user-select: none;
+}
+
+.sidebar-checkbox { display: none; }
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 8;
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle-btn { display: block; }
+
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 10;
+  }
+
+  #sidebar-toggle:checked ~ .layout-wrapper .sidebar {
+    transform: translateX(0);
+  }
+
+  #sidebar-toggle:checked ~ .sidebar-overlay {
+    display: block;
+  }
+
+  .content {
+    padding: 1.5rem 1rem;
+  }
+}

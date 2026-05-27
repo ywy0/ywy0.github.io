@@ -1,0 +1,11 @@
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <a href="/" class="site-logo">{{ site.title }}</a>
+  </div>
+  <ul class="nav-list">
+    <li><a href="/" class="nav-item{% if page.layout == 'home' %} active{% endif %}">首页</a></li>
+    <li><a href="/archive/" class="nav-item{% if page.title == '归档' %} active{% endif %}">归档</a></li>
+    <li><a href="/tags/" class="nav-item{% if page.title == '标签' %} active{% endif %}">标签</a></li>
+    <li><a href="/friends/" class="nav-item{% if page.title == '友链' %} active{% endif %}">友链</a></li>
+  </ul>
+</nav>

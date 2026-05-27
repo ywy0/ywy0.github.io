@@ -22,8 +22,12 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
-        /* theme + font CSS (will be fulfilled from network and cached) */
-        /* dynamic CDN resources are cached on first fetch instead */
+        '/css/base.css',
+        '/css/sidebar.css',
+        '/css/header.css',
+        '/css/footer.css',
+        '/css/syntax.css',
+        '/favicon.ico',
       ]);
     }),
   );
@@ -122,8 +126,12 @@ async function staleWhileRevalidate(request) {
 
   const fetchPromise = fetch(request)
     .then((response) => {
-      if (response.ok) cache.put(request, response.clone());
-      return response;
+      if (response.ok) {
+        cache.put(request, response.clone());
+        return response;
+      }
+      /* network returned error — fall back to cached if available */
+      return cached || response;
     })
     .catch(() => cached);
 
