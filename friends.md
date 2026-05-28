@@ -6,6 +6,7 @@ permalink: /friends/
 
 - [Abalone](https://abalone.life/)：陈__
 - [wu-kan](https://wu-kan.cn/)：博客主题提供者
+- [汉字方言对照](https://ywy0.github.io/HanziDialect/)：输入汉字，查看普通话、粤语、客家话等多方言读音
 
 ---
 
