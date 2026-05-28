@@ -1,10 +1,14 @@
 /* ===================================
- *  sidebar.css — 左侧导航栏
+ *  sidebar.css — 左侧自适应导航栏
+ *
+ *  默认: 窄栏（仅图标，56px）
+ *  宽屏 ≥1024px: 自动展开
+ *  点击底部按钮切换
  * =================================== */
 
 .sidebar {
-  width: var(--sidebar-width);
-  min-width: var(--sidebar-width);
+  width: 56px;
+  min-width: 56px;
   background: var(--color-sidebar-bg);
   border-right: 1px solid var(--color-border);
   display: flex;
@@ -12,11 +16,29 @@
   height: 100vh;
   position: sticky;
   top: 0;
+  overflow: hidden;
+  transition: width 0.25s ease, min-width 0.25s ease;
+  z-index: 10;
 }
 
+/* ── Expanded state ── */
+.sidebar.expanded {
+  width: 260px;
+  min-width: 260px;
+}
+
+/* ── Header / Logo ── */
 .sidebar-header {
-  padding: 1.5rem 1.2rem 1rem;
+  padding: 1.5rem 0;
+  text-align: center;
   border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar.expanded .sidebar-header {
+  padding: 1.5rem 1.2rem 1rem;
+  text-align: left;
 }
 
 .site-logo {
@@ -25,24 +47,40 @@
   letter-spacing: 1px;
   color: var(--color-text);
 }
-.site-logo:hover {
-  text-decoration: none;
-}
+.site-logo:hover { text-decoration: none; }
 
+.logo-full { display: none; }
+.logo-short { display: inline; }
+
+.sidebar.expanded .logo-short { display: none; }
+.sidebar.expanded .logo-full { display: inline; }
+
+/* ── Nav list ── */
 .nav-list {
   list-style: none;
   padding: 0.5rem 0;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .nav-item {
-  display: block;
-  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 0;
   font-size: 0.95rem;
   color: var(--color-text);
   border-left: 3px solid transparent;
   transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar.expanded .nav-item {
+  justify-content: flex-start;
+  padding: 0.6rem 1.2rem;
+  gap: 10px;
 }
 
 .nav-item:hover {
@@ -55,4 +93,43 @@
   background: #eaeaea;
   border-left-color: var(--color-text);
   font-weight: 600;
+}
+
+.nav-icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+/* ── Nav label (text) ── */
+.nav-label {
+  display: none;
+}
+
+.sidebar.expanded .nav-label {
+  display: inline;
+}
+
+/* ── Toggle button ── */
+.sidebar-collapse-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.8rem 0;
+  color: var(--color-text-lighter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--color-border);
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.sidebar-collapse-btn:hover { color: var(--color-text); }
+
+.sidebar:not(.expanded) .sidebar-collapse-btn svg {
+  transform: rotate(180deg);
+}
+
+.sidebar.expanded .sidebar-collapse-btn {
+  justify-content: flex-end;
+  padding: 0.8rem 1.2rem;
 }
