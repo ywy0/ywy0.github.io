@@ -1,0 +1,76 @@
+name: Push to WeChat Draft
+
+on:
+  push:
+    branches: [main]
+    paths: ['_posts/*.md']      # 只有 _posts/ 有变化才触发
+  workflow_dispatch:             # 也支持手动触发（处理全部文章）
+
+jobs:
+  push-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2          # 需要两个 commit 来做 diff
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests markdown
+
+      - name: Get changed posts
+        id: changed
+        run: |
+          # 手动触发时处理全部
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "count=$(ls _posts/*.md 2>/dev/null | wc -l)" >> "$GITHUB_OUTPUT"
+          else
+            # Push 触发时只处理本次变更的
+            if git rev-parse HEAD~1 >/dev/null 2>&1; then
+              POSTS=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md)
+            else
+              # 第一次 commit，处理所有
+              POSTS=$(ls _posts/*.md 2>/dev/null)
+            fi
+            echo "count=$(echo "$POSTS" | grep -c .)" >> "$GITHUB_OUTPUT"
+            echo "files<<EOF" >> "$GITHUB_OUTPUT"
+            echo "$POSTS" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push to WeChat Draft
+        if: steps.changed.outputs.count != '0'
+        env:
+          CHANGED_FILES: ${{ steps.changed.outputs.files }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # 手动触发：处理全部
+            python scripts/push_wechat.py \
+              --all \
+              --appid "${{ secrets.WECHAT_APPID }}" \
+              --secret "${{ secrets.WECHAT_APPSECRET }}" \
+              --author "忆屋"
+          else
+            # 逐个处理变更的文章
+            echo "$CHANGED_FILES" | while read -r post; do
+              [ -z "$post" ] && continue
+              echo "--- Processing: $post ---"
+              python scripts/push_wechat.py \
+                --post "$post" \
+                --appid "${{ secrets.WECHAT_APPID }}" \
+                --secret "${{ secrets.WECHAT_APPSECRET }}" \
+                --author "忆屋"
+            done
+          fi
+
+      - name: Commit sync state
+        run: |
+          git config user.name "wechat-push[bot]"
+          git config user.email "wechat-push[bot]@users.noreply.github.com"
+          git add .wechat-push-state.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "chore: update WeChat push state"
+          git push
